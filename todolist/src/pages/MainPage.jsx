@@ -55,6 +55,7 @@ function MainPage() {
               <div className="checkbox" onClick={() => toggleTask(task._id)}>
                 {task.done ? <RiCheckboxCircleFill className="icons" /> : <MdCheckBoxOutlineBlank className="icons" />}
                 <p>{task.task}</p>
+                {task.dueDate && <p className="due-date">Due: {new Date(task.dueDate).toLocaleDateString()}</p>}
               </div>
               <div>
               <span onClick={() => deleteTask(task._id)}><TiDelete className="icon" /></span>

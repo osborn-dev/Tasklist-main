@@ -34,10 +34,10 @@ app.put('/update/:id', async (req, res) => {
 
 app.put('/update-name/:id', async (req, res) => {
     const { id } = req.params;
-    const { taskName } = req.body;
+    const { taskName, dueDate } = req.body;
     try {
         // Find the task by id and update the name
-        const task = await TodoModel.findByIdAndUpdate(id, { task: taskName }, { new: true });
+        const task = await TodoModel.findByIdAndUpdate(id, { task: taskName, dueDate }, { new: true });
         res.json(task);
     } catch (err) {
         res.status(500).json(err);
@@ -60,8 +60,8 @@ app.delete('/delete/:id', (req, res) => {
 
 
 app.post('/add', (req, res) => {
-    const task = req.body.task;
-    TodoModel.create({ task: task })
+    const {task, dueDate} = req.body;
+    TodoModel.create({ task, dueDate })
         .then(result => res.json(result)) 
         .catch(err => res.status(500).json(err)); 
 });
